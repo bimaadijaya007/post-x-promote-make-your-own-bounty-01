@@ -43,6 +43,12 @@ if (
   process.exit(1);
 }
 
+const postUrl = (parsed as { url: string }).url;
+if (!postUrl.startsWith('https://x.com/') || !postUrl.includes('/status/')) {
+  console.error('POST.json url must be an x.com status link');
+  process.exit(1);
+}
+
 try {
   mkdirSync(outDir, { recursive: true });
   writeFileSync(targetPath, raw);
